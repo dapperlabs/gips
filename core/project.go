@@ -2,6 +2,7 @@ package core
 
 import (
 	"encoding/json"
+	"math/rand"
 	"reflect"
 	"time"
 
@@ -17,7 +18,11 @@ type ProjectService interface {
 }
 
 type Project struct {
-	Name   string   `json:"name" faker:"gcpProject" db:"name"`
+	Name    string             `json:"name" faker:"gcpProject" db:"name"`
+	Regions []ProjectRegionIPs `json:"regions" db:"regions"`
+}
+
+type ProjectRegionIPs struct {
 	Region string   `json:"region" faker:"gcpRegion" db:"region"`
 	IPs    []string `json:"ips" faker:"ips" db:"ips"`
 }
@@ -51,7 +56,10 @@ func CustomFakerData() {
 		return name, nil
 	})
 	_ = faker.AddProvider("gcpRegion", func(v reflect.Value) (interface{}, error) {
-		return "us-west1", nil
+		r := rand.New(rand.NewSource(time.Now().UnixNano()))
+		regions := []string{"us-west1", "us-east4", "europe-west2", "us-west2", "asia-south1"}
+		n := r.Intn(len(regions))
+		return regions[n], nil
 	})
 	_ = faker.AddProvider("ips", func(v reflect.Value) (interface{}, error) {
 		return []string{faker.IPv4(), faker.IPv4(), faker.IPv4(), faker.IPv4()}, nil
