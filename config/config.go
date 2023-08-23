@@ -34,6 +34,15 @@ type App struct {
 	Opts
 }
 
+type Projects struct {
+	Projects []Project
+}
+
+type Project struct {
+	Name    string
+	Regions []string
+}
+
 var (
 	defaultLogformat           = "text"
 	defaultLogLevel            = "debug"

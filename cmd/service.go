@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"crypto/tls"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -51,12 +50,17 @@ func StartService() {
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig()
 	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %w", err))
+		log.Fatalf("fatal error config file: %s", err)
+	}
+	// Let's put it into the config.Projects struct.
+	projects := config.Projects{}
+	err = viper.Unmarshal(&projects)
+	if err != nil {
+		log.Fatal("Config Unmarshal Error: ", err)
 	}
 
-	projects := viper.Get("projects")
-	for k, project := range projects.(map[string]interface{}) {
-		fmt.Printf("Project: %q %#v\n", k, project)
+	for _, project := range projects.Projects {
+		log.Printf("Project: %q in %s\n", project.Name, project.Regions)
 	}
 
 	// Setup some options

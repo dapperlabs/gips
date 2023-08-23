@@ -1,0 +1,16 @@
+---
+projects:
+  - name: the-test-project
+    regions:
+      - us-west1
+      - us-east4
+  - name: european-project
+    regions:
+      - europe-west2
+  - name: west-coast-project
+    regions: 
+      - us-west2
+  - name: east-coast-project
+    regions:
+      - us-east4
+    
