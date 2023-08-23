@@ -10,9 +10,10 @@ import (
 )
 
 type ProjectService interface {
-	Find(id string) (*Project, error)
-	Store(p *Project) (string, error)
+	Find(name string) (*Project, error)
+	FindIP(ip string) (*Project, error)
 	GetAll() ([]*Project, error)
+	Store(p *Project) (string, error)
 }
 
 type Project struct {
