@@ -5,6 +5,8 @@ go 1.21
 require (
 	github.com/SporkHubr/echo-http-cache v0.0.0-20200706100054-1d7ae9f38029
 	github.com/carlmjohnson/versioninfo v0.22.5
+	github.com/go-faker/faker/v4 v4.1.1
+	github.com/goombaio/namegenerator v0.0.0-20181006234301-989e774b106e
 	github.com/labstack/echo-contrib v0.15.0
 	github.com/labstack/echo/v4 v4.11.1
 	github.com/spf13/cobra v1.7.0
