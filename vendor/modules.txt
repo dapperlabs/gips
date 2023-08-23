@@ -6,8 +6,6 @@ cloud.google.com/go/compute/internal
 cloud.google.com/go/compute/metadata
 # github.com/SporkHubr/echo-http-cache v0.0.0-20200706100054-1d7ae9f38029
 ## explicit; go 1.14
-github.com/SporkHubr/echo-http-cache
-github.com/SporkHubr/echo-http-cache/adapter/memory
 # github.com/beorn7/perks v1.0.1
 ## explicit; go 1.11
 github.com/beorn7/perks/quantile
