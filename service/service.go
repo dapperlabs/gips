@@ -17,11 +17,9 @@ type HTTPService struct {
 }
 
 var (
-	APIPath                = "/api/v1"
-	NewsStoriesAPIPath     = "/stories"
-	NewsStoriesAPIPathFull = APIPath + NewsStoriesAPIPath
-	RecordsAPIPath         = "/records"
-	RecordsAPIPathFull     = APIPath + RecordsAPIPath
+	APIV1Path   = "/api/v1"
+	IPsPath     = "/search/:ip"
+	IPsPathFull = APIV1Path + IPsPath
 
 	// Middleware Cache settings
 	cacheCapacity   = 10000
@@ -74,6 +72,7 @@ func Get(conf *config.App) (*echo.Echo, error) {
 
 	// Routes
 	e.GET("/", s.Root)
+	e.GET(IPsPathFull, s.IPSearch)
 
 	// Infra
 	e.GET("/version", s.Version)
