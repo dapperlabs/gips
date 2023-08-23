@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"crypto/tls"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +11,7 @@ import (
 	"github.com/darron/gips/config"
 	"github.com/darron/gips/service"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -21,6 +23,12 @@ var (
 		},
 	}
 
+	defaultConfigFileName = "config"
+	configFileName        string
+
+	defaultConfigFileExtension = "yaml"
+	configFileExtension        string
+
 	defaultStorageLayer = "memory"
 	storageLayer        string
 
@@ -30,11 +38,27 @@ var (
 
 func init() {
 	rootCmd.AddCommand(serviceCmd)
+	serviceCmd.Flags().StringVarP(&configFileName, "config", "", GetENVVariable("CONFIG_FILE_NAME", defaultConfigFileName), "Config file name (without extension)")
+	serviceCmd.Flags().StringVarP(&configFileExtension, "fileExtension", "", GetENVVariable("CONFIG_FILE_EXTENSION", defaultConfigFileExtension), "Config file extension")
 	serviceCmd.Flags().StringVarP(&storageLayer, "storage", "", GetENVVariable("STORAGE", defaultStorageLayer), "Storage Layer: memory")
 	serviceCmd.Flags().BoolVarP(&middlewareHTMLCacheEnabled, "htmlcache", "", GetBoolENVVariable("HTMLCACHE_ENABLED", defaultMiddlewareHTMLCacheEnabled), "Enable Middleware Cache")
 }
 
 func StartService() {
+	// We need a config file for all the projects and regions.
+	viper.SetConfigName(configFileName)
+	viper.SetConfigType(configFileExtension)
+	viper.AddConfigPath(".")
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(fmt.Errorf("fatal error config file: %w", err))
+	}
+
+	projects := viper.Get("projects")
+	for k, project := range projects.(map[string]interface{}) {
+		fmt.Printf("Project: %q %#v\n", k, project)
+	}
+
 	// Setup some options
 	var opts []config.OptFunc
 	var tlsConfig *tls.Config
