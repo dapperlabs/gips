@@ -2,7 +2,6 @@ package gather
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/darron/gips/config"
@@ -22,12 +21,6 @@ func Start(config *config.App, projects config.Projects) {
 		if err != nil {
 			config.Logger.Error(err.Error())
 		}
-		// Let's see all the data we have.
-		data, err := config.ProjectStore.GetAll()
-		if err != nil {
-			config.Logger.Error(err.Error())
-		}
-		fmt.Printf("data: %+v\n", data)
 		config.Logger.Info("gather.Start", "sleeping", loopDelay.String())
 		time.Sleep(loopDelay)
 	}

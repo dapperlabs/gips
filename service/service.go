@@ -17,11 +17,13 @@ type HTTPService struct {
 }
 
 var (
-	APIV1Path       = "/api/v1"
-	IPsPath         = "/search/:ip"
-	IPsPathFull     = APIV1Path + IPsPath
-	ProjectPath     = "/project/:project"
-	ProjectPathFull = APIV1Path + ProjectPath
+	APIV1Path        = "/api/v1"
+	IPsPath          = "/search/:ip"
+	IPsPathFull      = APIV1Path + IPsPath
+	ProjectPath      = "/project/:project"
+	ProjectPathFull  = APIV1Path + ProjectPath
+	ProjectsPath     = "/projects"
+	ProjectsPathFull = APIV1Path + ProjectsPath
 
 	// Middleware Cache settings
 	cacheCapacity   = 10000
@@ -76,6 +78,7 @@ func Get(conf *config.App) (*echo.Echo, error) {
 	e.GET("/", s.Root)
 	e.GET(IPsPathFull, s.IPSearch)
 	e.GET(ProjectPathFull, s.Project)
+	e.GET(ProjectsPathFull, s.Projects)
 
 	// Infra
 	e.GET("/version", s.Version)

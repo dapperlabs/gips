@@ -27,8 +27,15 @@ func (s HTTPService) IPSearch(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	// TODO: Do the search here.
-	return c.JSON(http.StatusOK, ip)
+	// Now let's see if we can find it.
+	outputProject, err := s.conf.ProjectStore.FindIP(ip)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	if outputProject == nil {
+		return c.JSON(http.StatusNotFound, "no project found")
+	}
+	return c.JSON(http.StatusOK, *outputProject)
 }
 
 func isIPValid(ip string) error {

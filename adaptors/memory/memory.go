@@ -21,7 +21,7 @@ func (m *Memory) Find(name string) (*core.Project, error) {
 }
 
 func (m *Memory) FindIP(ip string) (*core.Project, error) {
-	return nil, nil
+	return m.bruteForce(ip)
 }
 
 func (m *Memory) GetAll() ([]*core.Project, error) {
@@ -35,4 +35,19 @@ func (m *Memory) GetAll() ([]*core.Project, error) {
 func (m *Memory) Store(p *core.Project) (string, error) {
 	m.data[p.Name] = p
 	return "", nil
+}
+
+// This is not great and won't scale with a large dataset.
+// But it will work for our dataset and it's fine at the moment.
+func (m *Memory) bruteForce(ip string) (*core.Project, error) {
+	for _, p := range m.data {
+		for _, r := range p.Regions {
+			for _, i := range r.IPs {
+				if i == ip {
+					return p, nil
+				}
+			}
+		}
+	}
+	return nil, nil
 }
