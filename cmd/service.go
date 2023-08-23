@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/darron/gips/config"
+	"github.com/darron/gips/gather"
 	"github.com/darron/gips/service"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -124,6 +125,9 @@ func StartService() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Start gathering data from GCP.
+	go gather.Start(conf, projects)
 
 	conf.Logger.Info("Starting HTTP Service")
 	s, err := service.Get(conf)
