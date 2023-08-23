@@ -67,6 +67,14 @@ func StartService() {
 	var opts []config.OptFunc
 	var tlsConfig *tls.Config
 
+	// Let's setup the storage layer
+	switch storageLayer {
+	case "memory":
+		opts = append(opts, config.WithMemoryStore())
+	default:
+		log.Fatal("Unknown storage layer")
+	}
+
 	opts = append(opts, config.WithPort(port))
 	opts = append(opts, config.WithLogger(logLevel, logFormat))
 	opts = append(opts, config.WithMiddlewareHTMLCache(middlewareHTMLCacheEnabled))

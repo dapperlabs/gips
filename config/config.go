@@ -8,6 +8,8 @@ import (
 	"os"
 	"strings"
 
+	"github.com/darron/gips/adaptors/memory"
+	"github.com/darron/gips/core"
 	"golang.org/x/crypto/acme"
 	"golang.org/x/crypto/acme/autocert"
 )
@@ -18,6 +20,7 @@ type Opts struct {
 	Logger              *slog.Logger
 	MiddlewareHTMLCache bool
 	Port                string
+	ProjectStore        core.ProjectService
 	TLS                 TLS
 }
 
@@ -54,6 +57,12 @@ func defaultOpts() Opts {
 	return Opts{
 		Port:                defaultPort,
 		MiddlewareHTMLCache: true,
+	}
+}
+
+func WithMemoryStore() OptFunc {
+	return func(opts *Opts) {
+		opts.ProjectStore = &memory.Memory{}
 	}
 }
 
