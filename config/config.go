@@ -62,7 +62,7 @@ func defaultOpts() Opts {
 
 func WithMemoryStore() OptFunc {
 	return func(opts *Opts) {
-		opts.ProjectStore = &memory.Memory{}
+		opts.ProjectStore = memory.New()
 	}
 }
 
