@@ -51,7 +51,11 @@ func Get(conf *config.App) (*echo.Echo, error) {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.RequestID())
-	e.Use(middleware.Gzip())
+	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
+		Skipper: func(c echo.Context) bool {
+			return c.Request().URL.Path == "/metrics"
+		},
+	}))
 
 	// Let's setup the in memory cache as middleware.
 	if s.conf.MiddlewareHTMLCache {
