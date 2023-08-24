@@ -31,9 +31,6 @@ var (
 
 	defaultStorageLayer = "memory"
 	storageLayer        string
-
-	defaultMiddlewareHTMLCacheEnabled = true
-	middlewareHTMLCacheEnabled        bool
 )
 
 func init() {
@@ -41,7 +38,6 @@ func init() {
 	serviceCmd.Flags().StringVarP(&configFileName, "config", "", GetENVVariable("CONFIG_FILE_NAME", defaultConfigFileName), "Config file name (without extension)")
 	serviceCmd.Flags().StringVarP(&configFileExtension, "fileExtension", "", GetENVVariable("CONFIG_FILE_EXTENSION", defaultConfigFileExtension), "Config file extension")
 	serviceCmd.Flags().StringVarP(&storageLayer, "storage", "", GetENVVariable("STORAGE", defaultStorageLayer), "Storage Layer: memory")
-	serviceCmd.Flags().BoolVarP(&middlewareHTMLCacheEnabled, "htmlcache", "", GetBoolENVVariable("HTMLCACHE_ENABLED", defaultMiddlewareHTMLCacheEnabled), "Enable Middleware Cache")
 }
 
 func StartService() {
@@ -78,7 +74,6 @@ func StartService() {
 
 	opts = append(opts, config.WithPort(port))
 	opts = append(opts, config.WithLogger(logLevel, logFormat))
-	opts = append(opts, config.WithMiddlewareHTMLCache(middlewareHTMLCacheEnabled))
 
 	// Let's turn on TLS with LetsEncrypt
 	// Setup the config here.

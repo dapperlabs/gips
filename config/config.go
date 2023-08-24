@@ -47,10 +47,9 @@ type Project struct {
 }
 
 var (
-	defaultLogformat           = "text"
-	defaultLogLevel            = "debug"
-	defaultPort                = "8080"
-	defaultHTMLMiddlewareCache = true
+	defaultLogformat = "text"
+	defaultLogLevel  = "debug"
+	defaultPort      = "8080"
 )
 
 func defaultOpts() Opts {
@@ -63,12 +62,6 @@ func defaultOpts() Opts {
 func WithMemoryStore() OptFunc {
 	return func(opts *Opts) {
 		opts.ProjectStore = memory.New()
-	}
-}
-
-func WithMiddlewareHTMLCache(enabled bool) OptFunc {
-	return func(opts *Opts) {
-		opts.MiddlewareHTMLCache = enabled
 	}
 }
 
@@ -98,7 +91,6 @@ func New() (*App, error) {
 	// Moving configuration to cmd and will be calling `Get(WithOption())`
 	optFuncs = append(optFuncs, WithLogger(defaultLogLevel, defaultLogformat))
 	optFuncs = append(optFuncs, WithPort(defaultPort))
-	optFuncs = append(optFuncs, WithMiddlewareHTMLCache(defaultHTMLMiddlewareCache))
 
 	return Get(optFuncs...)
 }
