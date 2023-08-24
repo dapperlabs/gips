@@ -44,4 +44,4 @@ unit: ## Run unit tests.
 lint: ## See https://github.com/golangci/golangci-lint#install for install instructions
 	golangci-lint run ./...
 
-.PHONY: help all deps clean build gzip release unit lint docker docker-curl
+.PHONY: help all deps clean build gzip release unit lint docker

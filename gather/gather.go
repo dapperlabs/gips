@@ -16,12 +16,14 @@ var (
 func Start(config *config.App, projects config.Projects) {
 	// Start gathering data from GCP - loop forever.
 	for {
+		start := time.Now()
 		config.Logger.Info("gather.Start")
 		err := gather(config, projects)
 		if err != nil {
 			config.Logger.Error(err.Error())
 		}
-		config.Logger.Info("gather.Start", "sleeping", loopDelay.String())
+		since := start.Sub(start)
+		config.Logger.Info("gather.Start", "sleeping", loopDelay.String(), "loopTime", since.String())
 		time.Sleep(loopDelay)
 	}
 }
