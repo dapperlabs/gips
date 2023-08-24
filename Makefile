@@ -44,4 +44,7 @@ unit: ## Run unit tests.
 lint: ## See https://github.com/golangci/golangci-lint#install for install instructions
 	golangci-lint run ./...
 
-.PHONY: help all deps clean build gzip release unit lint docker
+config:
+	kubectl create configmap $(BINARY_NAME)-config --from-file=config.yaml
+
+.PHONY: help all deps clean build gzip release unit lint docker config

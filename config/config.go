@@ -147,7 +147,7 @@ func GetLogger(level, format string) *slog.Logger {
 
 func (t TLS) LetsEncryptVerify() error {
 	if t.CacheDir == "" {
-		return errors.New("Cache dir cannot be emtpy")
+		return errors.New("cache dir cannot be emtpy")
 	}
 	// Check to see if the cache dir exists - if it doesn't try to create it.
 	if _, err := os.Open(t.CacheDir); os.IsNotExist(err) {
@@ -158,10 +158,10 @@ func (t TLS) LetsEncryptVerify() error {
 		}
 	}
 	if t.DomainNames == "" {
-		return errors.New("Domain names cannot be empty")
+		return errors.New("domain names cannot be empty")
 	}
 	if t.Email == "" {
-		return errors.New("Email address cannot be empty")
+		return errors.New("email address cannot be empty")
 	}
 	return nil
 }
