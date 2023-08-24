@@ -20,7 +20,7 @@ var (
 func (s HTTPService) IPSearch(c echo.Context) error {
 	ip := c.Param("ip")
 	if ip == "" {
-		return c.JSON(http.StatusNotFound, "ip must not be blank")
+		return c.JSON(http.StatusBadRequest, "ip must not be blank")
 	}
 	// Check to see if it's well formed and valid.
 	err := isIPValid(ip)
@@ -35,6 +35,8 @@ func (s HTTPService) IPSearch(c echo.Context) error {
 	if outputProject == nil {
 		return c.JSON(http.StatusNotFound, "no project found")
 	}
+	// This means there's a project with that IP address.
+	// NOTE: THIS IS BAD.
 	return c.JSON(http.StatusOK, *outputProject)
 }
 
