@@ -13,5 +13,4 @@ RUN apk add --update --no-cache \
   rm -vf /var/cache/apk/*
 WORKDIR /
 COPY --from=build /gips/bin/gips /bin/gips
-USER nobody
 ENTRYPOINT ["gips", "service"]
