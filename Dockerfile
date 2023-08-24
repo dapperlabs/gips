@@ -12,5 +12,6 @@ RUN apk add --update --no-cache \
   ca-certificates && \
   rm -vf /var/cache/apk/*
 WORKDIR /
-COPY --from=build /gips/bin/gips /
-ENTRYPOINT ["./gips", "service"]
+COPY --from=build /gips/bin/gips /bin/gips
+USER nobody
+ENTRYPOINT ["gips", "service"]
