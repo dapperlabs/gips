@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gips
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gips
+  template:
+    metadata:
+      labels:
+        app: gips
+    spec:
+      containers:
+        - name: gips
+          image: darron/gips:1020b3f0cf74cbc9fb36c657b0c92dc54ea2859a
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/gips
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CONFIG_FILE_NAME
+              value: "/etc/gips/config"
+            - name: PATH
+              value: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: gips-config
