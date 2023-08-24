@@ -44,7 +44,10 @@ func Get(conf *config.App) (*echo.Echo, error) {
 	e.Use(middleware.RequestID())
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 		Skipper: func(c echo.Context) bool {
-			return c.Request().URL.Path == "/metrics"
+			if c.Request().URL.Path == "/metrics" || c.Request().URL.Path == "/version" {
+				return true
+			}
+			return false
 		},
 	}))
 
