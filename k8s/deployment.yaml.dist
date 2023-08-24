@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gips
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gips
+  template:
+    metadata:
+      labels:
+        app: gips
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: you-need-a-service-account-with-permissions
+      containers:
+        - name: gips
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            runAsUser: 1000
+            runAsGroup: 3000
+            capabilities:
+              drop: ["ALL"]
+          image: darron/gips:99e4769a3feec9a81fa1db4d7320babc8b7a558e
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/gips
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CONFIG_FILE_NAME
+              value: "/etc/gips/config"
+            - name: PATH
+              value: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: gips-config

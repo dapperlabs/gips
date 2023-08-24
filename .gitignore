@@ -2,3 +2,4 @@ bin/gips
 .vscode
 .envrc
 config.yaml
+k8s/deployment.yaml
