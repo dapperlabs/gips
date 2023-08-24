@@ -22,7 +22,7 @@ func Start(config *config.App, projects config.Projects) {
 		if err != nil {
 			config.Logger.Error(err.Error())
 		}
-		since := start.Sub(start)
+		since := time.Since(start)
 		config.Logger.Info("gather.Start", "sleeping", loopDelay.String(), "loopTime", since.String())
 		time.Sleep(loopDelay)
 	}
