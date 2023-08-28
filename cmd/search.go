@@ -33,8 +33,7 @@ func doSearch() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	serviceAddr := conf.GetHTTPEndpoint()
-	endpoint := fmt.Sprintf("%s/api/v1/search/%s", serviceAddr, ip)
+	endpoint := conf.GetSearchEndpointWithIP(ip)
 	fmt.Printf("Searching for %s in %s\n", ip, endpoint)
 	project, err := search.IP(ip, endpoint)
 	if err != nil {

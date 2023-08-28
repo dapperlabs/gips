@@ -118,6 +118,10 @@ func (a *App) GetHTTPEndpoint() string {
 	return fmt.Sprintf("%s://%s:%s", protocol, domain, port)
 }
 
+func (a *App) GetSearchEndpointWithIP(ip string) string {
+	return fmt.Sprintf("%s/api/v1/search/%s", a.GetHTTPEndpoint(), ip)
+}
+
 func GetLogger(level, format string) *slog.Logger {
 	var slogLevel slog.Level
 	var slogHandler slog.Handler
