@@ -25,7 +25,7 @@ spec:
             runAsGroup: 3000
             capabilities:
               drop: ["ALL"]
-          image: darron/gips:99e4769a3feec9a81fa1db4d7320babc8b7a558e
+          image: darron/gips:1a89aeea42db0e71b8be6c8d211111ee2a3c34c0
           volumeMounts:
             - name: config-volume
               mountPath: /etc/gips

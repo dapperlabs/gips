@@ -37,7 +37,7 @@ It's queryable with `curl` and outputs JSON:
 - [x] NAT IPs
 - [x] golang package to query this - `search`
 - [x] cli interface for search endpoint and to test `search` package
+- [x] CloudSQL IPs
 - [ ] Figure out proper amount of permissions this needs to run - add Terraform to allow those permissions
-- [ ] CloudSQL IPs?
 - [ ] Do we tag the IPs so we can find them quickly? OR is just knowing the project enough for this?
 - [ ] Helm chart?
