@@ -16,6 +16,8 @@ github.com/cespare/xxhash/v2
 # github.com/darron/gnatips-go v0.0.0-20230822010647-f847f60344a5
 ## explicit; go 1.20
 github.com/darron/gnatips-go
+# github.com/davecgh/go-spew v1.1.1
+## explicit
 # github.com/fsnotify/fsnotify v1.6.0
 ## explicit; go 1.16
 github.com/fsnotify/fsnotify
@@ -179,12 +181,6 @@ github.com/spf13/viper/internal/encoding/yaml
 # github.com/subosito/gotenv v1.6.0
 ## explicit; go 1.18
 github.com/subosito/gotenv
-# github.com/tidwall/gjson v1.16.0
-## explicit; go 1.12
-# github.com/tidwall/match v1.1.1
-## explicit; go 1.15
-# github.com/tidwall/pretty v1.2.1
-## explicit; go 1.16
 # github.com/valyala/bytebufferpool v1.0.0
 ## explicit
 github.com/valyala/bytebufferpool
@@ -278,6 +274,7 @@ google.golang.org/api/internal/impersonate
 google.golang.org/api/internal/third_party/uritemplates
 google.golang.org/api/option
 google.golang.org/api/option/internaloption
+google.golang.org/api/sqladmin/v1
 google.golang.org/api/transport/http
 google.golang.org/api/transport/http/internal/propagation
 # google.golang.org/appengine v1.6.7
