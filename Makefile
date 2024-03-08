@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 BINARY_NAME ?= gips
-CONTAINER_NAME ?= darron/gips
+CONTAINER_NAME ?= us-west1-docker.pkg.dev/dl-shared-artifacts/sre/gips
 
 BUILD_COMMAND=-mod=vendor -o bin/$(BINARY_NAME) ../$(BINARY_NAME)
 UNAME=$(shell uname -s | tr '[:upper:]' '[:lower:]')

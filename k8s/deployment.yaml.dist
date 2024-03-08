@@ -28,7 +28,7 @@ spec:
             runAsGroup: 3000
             capabilities:
               drop: ["ALL"]
-          image: darron/gips:1a89aeea42db0e71b8be6c8d211111ee2a3c34c0
+          image: us-west1-docker.pkg.dev/dl-shared-artifacts/sre/gips:1a89aeea42db0e71b8be6c8d211111ee2a3c34c0
           volumeMounts:
             - name: config-volume
               mountPath: /etc/gips
